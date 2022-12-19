@@ -1,0 +1,109 @@
+/* Css Properties */
+:root {
+    --lightaqua: #7fffd4;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+
+/* Generics */
+body {
+    background-color: var(--lightaqua);
+}
+
+header {
+    height: 10vh;
+    padding: 15px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+main {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/** LOGO **/
+.logo {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+/** CONTROLS **/
+
+#play-button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    border: 1px solid dodgerblue;
+    background-color: dodgerblue;
+    cursor: pointer;
+}
+
+#select-level {
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-right: 10px;
+    color: white;
+    background-color: dodgerblue;
+    cursor: pointer;
+
+}
+
+/** GRID **/
+#grid {
+    margin: 20px auto;
+    height: 80vh;
+    width: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#grid .cell {
+    height: 10%;
+    width: 10%;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#grid .cell.clicked {
+    background-color: blue;
+    color: white;
+}
+
+#grid.easy .cell {
+    height: calc(100%/10);
+    width: calc(100%/10);
+}
+
+#grid.medium .cell {
+    height: calc(100%/9);
+    width: calc(100%/9);
+}
+
+#grid.hard .cell {
+    height: calc(100%/7);
+    width: calc(100%/7);
+}

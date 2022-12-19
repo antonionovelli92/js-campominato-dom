@@ -28,3 +28,75 @@ Aggiungere una select accanto al bottone di generazione, che fornisca una scelta
 Se avete finito tutti i bonus potete scrivere all'insegnante o ai tutor per ricevere delle sfide extra!
 Buon lavoro e buon divertimento! :faccia_leggermente_sorridente:
 */
+
+// ! FASE PREPARATORIA-----------------------
+
+// Recupero gli elementi in pagina:
+const grid = document.getElementById('grid');
+const playButton = document.getElementById('play-button');
+const levelSelect = document.getElementById('select-level');
+
+
+function play() {
+    // Creo una funzione nella funzione, la funzione play tanto verrà usata una sola volta;
+    // ! Funzioni interne al gioco;
+    const createCell = (number) => {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.append(number);
+        return cell;
+    }
+
+
+    //? -----Cambio il testo del bottone in "RICOMINCIA!"------
+    playButton.innerText = 'Ricomincia!';
+    // Potevo usare anche il this o l'evento, vedi lezione, e mettere tutto all'interno di una funzione(lezione 19/12).
+
+    // Svuotiamo la griglia
+    grid.innerHTML = '';
+
+    // !-------------------------
+    // !SVOLGIMENTO ESERCIZIO
+    // !-------------------------
+
+    // Recupero il valore option della select:
+    const level = levelSelect.value;
+
+    // prendiamo le classi create sul css con lo stesso nome della mia variabile (solo per cmodità);
+    grid.classList.add(level);
+    // Calcolo righe e colonne
+    let cols;
+    let rows;
+    switch (level) {
+        case 'medium':
+            cols = rows = 9;
+            break;
+        case 'hard':
+            cols = rows = 7;
+            break;
+        case 'easy':
+        default:
+            cols = rows = 10;
+    }
+    const totalCells = rows * cols;
+
+    for (let i = 1; i <= totalCells; i++) {
+
+        // variabile datta dalla funzione createCell;
+        const cell = createCell(i);
+
+        // creo un event listner della cella:
+        cell.addEventListener('click', function () {
+            cell.classList.add('clicked');
+            console.log(i);
+        })
+
+        // TODO aggiungo un event listner alla cella prima di "appenderla", spostandola in una funzione (createCell):
+        grid.appendChild(cell);
+    }
+
+
+}
+
+// Creo la mia logica all'interno del 'click del bottone':
+playButton.addEventListener('click', play);
