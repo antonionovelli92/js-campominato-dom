@@ -35,6 +35,7 @@ Buon lavoro e buon divertimento! :faccia_leggermente_sorridente:
 const grid = document.getElementById('grid');
 const playButton = document.getElementById('play-button');
 const levelSelect = document.getElementById('select-level');
+const result = document.getElementById('result')
 
 
 function play() {
@@ -85,10 +86,15 @@ function play() {
         // variabile datta dalla funzione createCell;
         const cell = createCell(i);
 
+        // lista array per i numeri random
+        let cellSelected;
+
         // creo un event listner della cella:
         cell.addEventListener('click', function () {
             cell.classList.add('clicked');
             console.log(i);
+
+
         })
 
         // TODO aggiungo un event listner alla cella prima di "appenderla", spostandola in una funzione (createCell):
