@@ -52,8 +52,9 @@ function play() {
     //! creo una funzione nella funzione, funzione per generare le bombe:
     const generateBombs = (maxNumber, totalNumbers) => {
         const bombs = [];
+
         // Finchè l'array non raggiunge 16:
-        while (bombs.lenght < totalNumbers) {
+        while (bombs.length < totalNumbers) {
             let random;
             do {
                 random = Math.floor(Math.random() * maxNumber) + 1;
@@ -109,6 +110,9 @@ function play() {
     const maxPoints = totalCells - totalBombs;
     // Genero le bombe:
     const bombs = generateBombs(totalCells, totalBombs);
+    console.log(bombs);
+
+
 
 
     // !---------------------------------
@@ -126,13 +130,26 @@ function play() {
             if (cell.classList.contains('clicked')) {
                 return;
             }
+
+
             // metto classe clicked
             cell.classList.add('clicked');
             console.log(i);
-            // incrementa il punteggio
-            scoreDisplay.innerText = ++score;
-            console.log(score);
 
+            // Controllo se ho preso una bomba:
+            const cellNumber = parseInt(cell.innerText);
+            const hasHitBomb = bombs.includes(cellNumber);
+            if (hasHitBomb) {
+                cell.classList.add('bomb');
+                console.log(`Hai perso! Punti ottenuti: ${score}`);
+            } else {
+                // incrementa il punteggio
+                scoreDisplay.innerText = ++score;
+                // verifico se ho vinto
+                if (score === maxPoints) {
+                    console.log(`Hai vinto! Punti ottenuti: ${score}`);
+                }
+            }
         })
 
         // ? aggiungo un event listner alla cella prima di "appenderla", spostandola in una funzione (createCell):
