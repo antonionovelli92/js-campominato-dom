@@ -91,6 +91,7 @@ main {
 #grid .cell.clicked {
     background-color: blue;
     color: white;
+    cursor: not-allowed;
 }
 
 #grid.easy .cell {

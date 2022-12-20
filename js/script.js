@@ -36,6 +36,7 @@ const grid = document.getElementById('grid');
 const playButton = document.getElementById('play-button');
 const levelSelect = document.getElementById('select-level');
 const result = document.getElementById('result')
+const scoreDisplay = document.getElementById('display-score')
 
 
 function play() {
@@ -46,6 +47,20 @@ function play() {
         cell.classList.add('cell');
         cell.append(number);
         return cell;
+    }
+
+    //! creo una funzione nella funzione, funzione per generare le bombe:
+    const generateBombs = (maxNumber, totalNumbers) => {
+        const bombs = [];
+        // Finchè l'array non raggiunge 16:
+        while (bombs.lenght < totalNumbers) {
+            let random;
+            do {
+                random = Math.floor(Math.random() * maxNumber) + 1;
+            } while (bombs.includes(random)); // fino a quando il numero che peschi sia già nell'array
+            bombs.push(random);
+        }
+        return bombs;
     }
 
 
@@ -81,23 +96,46 @@ function play() {
     }
     const totalCells = rows * cols;
 
+
+
+    // Preparo la variabile del punteggio
+    let score = 0;
+
+
+    // mi segno il numero di bombe:
+    const totalBombs = 16;
+
+    // Punteggio massimo:
+    const maxPoints = totalCells - totalBombs;
+    // Genero le bombe:
+    const bombs = generateBombs(totalCells, totalBombs);
+
+
+    // !---------------------------------
+    // ! svolgimeento effettivo
+    // !---------------------------------
+
     for (let i = 1; i <= totalCells; i++) {
 
         // variabile datta dalla funzione createCell;
         const cell = createCell(i);
 
-        // lista array per i numeri random
-        let cellSelected;
-
         // creo un event listner della cella:
         cell.addEventListener('click', function () {
+            // Controllo se era stata già cliccata:
+            if (cell.classList.contains('clicked')) {
+                return;
+            }
+            // metto classe clicked
             cell.classList.add('clicked');
             console.log(i);
-
+            // incrementa il punteggio
+            scoreDisplay.innerText = ++score;
+            console.log(score);
 
         })
 
-        // TODO aggiungo un event listner alla cella prima di "appenderla", spostandola in una funzione (createCell):
+        // ? aggiungo un event listner alla cella prima di "appenderla", spostandola in una funzione (createCell):
         grid.appendChild(cell);
     }
 
